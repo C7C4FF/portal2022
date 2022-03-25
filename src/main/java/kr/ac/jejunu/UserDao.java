@@ -3,6 +3,7 @@ package kr.ac.jejunu;
 import java.sql.*;
 
 public class UserDao {
+    // DaoFactory 가 DI, 의존성을 주입함.
     private final ConnectionMaker connectionMaker;
 
     public UserDao(ConnectionMaker connectionMaker) {
