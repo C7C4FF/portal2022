@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="kr.ac.jejunu.UserDaoTests" tests="2" skipped="0" failures="0" errors="0" timestamp="2022-03-25T08:49:12" hostname="gimhuibeom-ui-MacBookPro.local" time="0.695">
+  <properties/>
+  <testcase name="insert()" classname="kr.ac.jejunu.UserDaoTests" time="0.647"/>
+  <testcase name="findbyId()" classname="kr.ac.jejunu.UserDaoTests" time="0.047"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
