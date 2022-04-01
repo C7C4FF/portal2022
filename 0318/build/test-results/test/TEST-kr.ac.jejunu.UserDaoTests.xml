@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="kr.ac.jejunu.UserDaoTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-03-18T09:29:21" hostname="gimhuibeom-ui-MacBookPro.local" time="0.457">
+<testsuite name="kr.ac.jejunu.UserDaoTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-04-01T06:14:41" hostname="gimhuibeom-ui-MacBookPro.local" time="0.75">
   <properties/>
-  <testcase name="findbyId()" classname="kr.ac.jejunu.UserDaoTests" time="0.457"/>
+  <testcase name="findbyId()" classname="kr.ac.jejunu.UserDaoTests" time="0.75"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
