@@ -1,6 +1,5 @@
 package kr.ac.jejunu;
 
-import javax.sql.DataSource;
 import java.sql.*;
 
 public class UserDao {
@@ -11,22 +10,27 @@ public class UserDao {
     }
 
     public User findById(Integer id) throws SQLException {
-        StatementStrategy statementStrategy = new FindStatementStrategy(id);
-        return jdbcContext.jdbcContextForFind(statementStrategy);
+        String sql = "select * from userinfo where id = ?";
+        Object[] params = new Object[] {id};
+        return jdbcContext.find(sql, params);
     }
 
     public void insert(User user) throws ClassNotFoundException, SQLException {
-        StatementStrategy statementStrategy = new InsertStatementStrategy(user);
-        jdbcContext.jdbcContextForInsert(user, statementStrategy);
+        String sql = "insert into userinfo(name, password) values (?, ?)";
+        Object[] params = new Object[] {user.getName(), user.getPassword()};
+        jdbcContext.insert(user, sql, params);
     }
 
     public void update(User user) throws SQLException {
-        StatementStrategy statementStrategy = new UpdateStatementStrategy(user);
-        jdbcContext.jdbcContextForUpdate(statementStrategy);
+        String sql = "update userinfo set name = ?, password = ? where id = ?";
+        Object[] params = new Object[] {user.getName(), user.getPassword(), user.getId()};
+        jdbcContext.update(sql, params);
     }
 
     public void delete(Integer id) throws SQLException {
-        StatementStrategy statementStrategy = new DeleteStatementStrategy(id);
-        jdbcContext.jdbcContextForUpdate(statementStrategy);
+        String sql = "delete from userinfo where id = ?";
+        Object[] params = new Object[] {id};
+        jdbcContext.update(sql, params);
     }
+
 }
