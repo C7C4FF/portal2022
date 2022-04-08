@@ -1,28 +1,32 @@
 package kr.ac.jejunu;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 
 import javax.sql.DataSource;
-import java.sql.*;
+import java.sql.Driver;
 
 @Configuration
 public class DaoFactory {
-
     @Value("${db.drivername}")
-    private String driverClassName; // = "com.mysql.cj.jdbc.Driver";
+    private String driverClassName; //= "com.mysql.cj.jdbc.Driver";
     @Value("${db.url}")
-    private String url; // = "jdbc:mysql://localhost:3306/jeju";
+    private String url; //= "jdbc:mysql://192.168.151.176:3306/jeju?serverTimezone=UTC";
     @Value("${db.username}")
-    private String username; // = "root";
+    private String username; //= "jeju";
     @Value("${db.password}")
-    private String password; // = "1234";
-
+    private String password; //= "jejupw";
 
     @Bean
     public UserDao userDao() throws ClassNotFoundException {
-        return new UserDao(dataSource());
+        return new UserDao(jdbcContext());
+    }
+
+    @Bean
+    public JdbcContext jdbcContext() throws ClassNotFoundException {
+        return new JdbcContext(dataSource());
     }
 
     @Bean
@@ -33,7 +37,6 @@ public class DaoFactory {
         dataSource.setUrl(url);
         dataSource.setUsername(username);
         dataSource.setPassword(password);
-
         return dataSource;
     }
 }

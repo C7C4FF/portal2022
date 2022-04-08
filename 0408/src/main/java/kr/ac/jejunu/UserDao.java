@@ -4,137 +4,29 @@ import javax.sql.DataSource;
 import java.sql.*;
 
 public class UserDao {
-    private final DataSource dataSource;
+    private final JdbcContext jdbcContext;
 
-    public UserDao(DataSource dataSource) {
-        this.dataSource = dataSource;
+    public UserDao(JdbcContext jdbcContext) {
+        this.jdbcContext = jdbcContext;
     }
 
     public User findById(Integer id) throws SQLException {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        User user = null;
-        try {
-            connection = dataSource.getConnection();
-            // sql 작성
-            StatementStrategy statementStrategy = new FindStatementStrategy();
-            preparedStatement = statementStrategy.makeStatement(id, connection);
-            //sql 실행
-            resultSet = preparedStatement.executeQuery();
-            if (resultSet.next()) { // null 값이 아니라면
-                // User 에 데이터 매핑
-                user = new User();
-                user.setId(resultSet.getInt("id"));
-                user.setName(resultSet.getString("name"));
-                user.setPassword(resultSet.getString("password"));
-            }
-        } finally {
-            // 자원 해지
-            try {
-                resultSet.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            try {
-                preparedStatement.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            try {
-                connection.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        // User 리턴
-        return user;
+        StatementStrategy statementStrategy = new FindStatementStrategy(id);
+        return jdbcContext.jdbcContextForFind(statementStrategy);
     }
 
     public void insert(User user) throws ClassNotFoundException, SQLException {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-        try {
-            // 드라이버 로딩
-            connection = dataSource.getConnection();
-            // sql 작성
-            StatementStrategy statementStrategy = new InsertStatementStrategy();
-            preparedStatement = statementStrategy.makeStatement(user, connection);
-            // sql 실행
-            preparedStatement.executeUpdate();
-            resultSet = preparedStatement.getGeneratedKeys();
-            resultSet.next();
-            // User 에 데이터 매핑
-            user.setId(resultSet.getInt(1));
-        } finally {
-            // 자원 해지
-            try {
-                resultSet.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            try {
-                preparedStatement.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            try {
-                connection.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+        StatementStrategy statementStrategy = new InsertStatementStrategy(user);
+        jdbcContext.jdbcContextForInsert(user, statementStrategy);
     }
 
     public void update(User user) throws SQLException {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        try {
-            // 드라이버 로딩
-            connection = dataSource.getConnection();
-            // sql 작성
-            StatementStrategy statementStrategy = new UpdateStatementStrategy();
-            preparedStatement = statementStrategy.makeStatement(user, connection);
-            // sql 실행
-            preparedStatement.executeUpdate();
-        } finally {
-            // 자원 해지
-            try {
-                preparedStatement.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            try {
-                connection.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+        StatementStrategy statementStrategy = new UpdateStatementStrategy(user);
+        jdbcContext.jdbcContextForUpdate(statementStrategy);
     }
 
     public void delete(Integer id) throws SQLException {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        try {
-            // 드라이버 로딩
-            connection = dataSource.getConnection();
-            StatementStrategy statementStrategy = new DeleteStatementStrategy();
-            preparedStatement = statementStrategy.makeStatement(id, connection);
-            // sql 실행
-            preparedStatement.executeUpdate();
-        } finally {
-            // 자원 해지
-            try {
-                preparedStatement.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            try {
-                connection.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+        StatementStrategy statementStrategy = new DeleteStatementStrategy(id);
+        jdbcContext.jdbcContextForUpdate(statementStrategy);
     }
 }
