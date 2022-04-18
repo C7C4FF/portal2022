@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="kr.ac.jejunu.UserDaoTests" tests="4" skipped="0" failures="0" errors="0" timestamp="2022-04-08T09:05:39" hostname="gimhuibeom-ui-MacBookPro.local" time="0.74">
+<testsuite name="kr.ac.jejunu.UserDaoTests" tests="4" skipped="0" failures="0" errors="0" timestamp="2022-04-15T09:31:44" hostname="gimhuibeom-ui-MacBookPro.local" time="0.625">
   <properties/>
-  <testcase name="delete()" classname="kr.ac.jejunu.UserDaoTests" time="0.549"/>
-  <testcase name="insert()" classname="kr.ac.jejunu.UserDaoTests" time="0.081"/>
-  <testcase name="update()" classname="kr.ac.jejunu.UserDaoTests" time="0.082"/>
+  <testcase name="delete()" classname="kr.ac.jejunu.UserDaoTests" time="0.47"/>
+  <testcase name="insert()" classname="kr.ac.jejunu.UserDaoTests" time="0.052"/>
+  <testcase name="update()" classname="kr.ac.jejunu.UserDaoTests" time="0.077"/>
   <testcase name="findById()" classname="kr.ac.jejunu.UserDaoTests" time="0.024"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
