@@ -11,13 +11,13 @@ import java.sql.Driver;
 @Configuration
 public class DaoFactory {
     @Value("${db.drivername}")
-    private String driverClassName; //= "com.mysql.cj.jdbc.Driver";
+    private String driverClassName; // = "com.mysql.cj.jdbc.Driver";
     @Value("${db.url}")
-    private String url; //= "jdbc:mysql://192.168.151.176:3306/jeju?serverTimezone=UTC";
+    private String url; // = "jdbc:mysql://localhost:3306/jeju";
     @Value("${db.username}")
-    private String username; //= "jeju";
+    private String username; // = "root";
     @Value("${db.password}")
-    private String password; //= "jejupw";
+    private String password; // = "1234";
 
     @Bean
     public UserDao userDao() throws ClassNotFoundException {
