@@ -25,6 +25,12 @@ public class UserController {
 
         return modelAndView;
     }
+    @GetMapping(value = "modelattribute")
+    public String modelAttribute(@ModelAttribute User user){
+        // user.setName("") 여기에 넣으면 고정됨
+        return "forward:/upload";
+    }
+
     @RequestMapping("/upload")
     public void upload(){
 
