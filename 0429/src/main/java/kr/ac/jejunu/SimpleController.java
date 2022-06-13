@@ -7,12 +7,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class SimpleController implements Controller {
-
+    private final UserDao userDao;
     @Override
     public ModelAndView handleRequest(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        User user = new User();
-        user.setId(Integer.parseInt(request.getParameter("id")));
-        user.setName(request.getParameter("name"));
+        User user = userDao.findById(Integer.valueOf(request.getParameter("id"))).get();
+//        user.setId(Integer.parseInt(request.getParameter("id")));
+//        user.setName(request.getParameter("name"));
         ModelAndView modelAndView = new ModelAndView("user");
         modelAndView.addObject("user", user);
 

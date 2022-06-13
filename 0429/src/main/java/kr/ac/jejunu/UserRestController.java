@@ -6,13 +6,16 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/user")
 public class UserRestController {
+    private final UserDao userDao;
+
     @GetMapping
     public User get(@RequestParam("id") Integer id, @RequestParam("name") String name){
-        return User.builder().id(id).name(name).build();
+        return userDao.findById(id).get();
     }
 
     @PostMapping
     public User create(@RequestBody User user){
+        userDao.save(user);
         return user;
     }
 
